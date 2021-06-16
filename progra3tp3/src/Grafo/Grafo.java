@@ -3,7 +3,7 @@ package Grafo;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class Grafo {
+public class Grafo{
 	private boolean[][] matAdyacencia;
 	private int numVerts;
 	private Vertice[] vertices;
@@ -19,12 +19,13 @@ public class Grafo {
 		}
 	}
 
+
 	public int numVertice(String nombre) {
 		Vertice v = new Vertice(nombre);
 		boolean encontrado = false;
 		int i = 0;
 		for (; (i < numVerts) && !encontrado;) {
-			encontrado = vertices[i].equals(v);
+			encontrado = vertices[i].equalsPropio(v);
 			if (!encontrado)
 				i++;
 		}
@@ -44,7 +45,7 @@ public class Grafo {
 	public void nuevoArco(String a, String b) {
 		int numA = numVertice(a);
 		int numB = numVertice(b);
-		// numVertice no encuentra el vertice y retorna -1 
+		// numVertice no encuentra el vertice y retorna -1
 		System.out.println(numA);
 		vertices[numA].sumarGrado();
 		vertices[numB].sumarGrado();
@@ -59,15 +60,8 @@ public class Grafo {
 		int numB = numVertice(b);
 		return matAdyacencia[numA][numB];
 	}
+
 	
-	public ArrayList<Vertice> conjuntoDominanteMejorResultado(){
-		ArrayList<Vertice> dominante = eleccionPorMayorGrado();
-		ArrayList<Vertice> eleccion = eleccionVecinal();
-		
-		return (dominante.size() < eleccion.size())
-			   ? dominante
-			   : eleccion;
-	}
 
 	public ArrayList<Vertice> eleccionPorMayorGrado() {
 		ArrayList<Vertice> ret = new ArrayList<Vertice>();
@@ -90,7 +84,7 @@ public class Grafo {
 		}
 		return ret;
 	}
-	
+
 	public ArrayList<Vertice> eleccionVecinal() {
 		ArrayList<Vertice> ret = new ArrayList<Vertice>();
 		ArrayList<Vertice> alcanzados = new ArrayList<Vertice>();
@@ -98,10 +92,10 @@ public class Grafo {
 			int mayorAlcance = -1;
 			Vertice verticePorAgregar = new Vertice("v");
 			for (Vertice v : vertices) {
-				if (!v.enConjunto() && cantNuevosVecinos(v,alcanzados ) > mayorAlcance) {
-						mayorAlcance = v.getGrado();
-						verticePorAgregar = v;
-					}	
+				if (!v.enConjunto() && cantNuevosVecinos(v, alcanzados) > mayorAlcance) {
+					mayorAlcance = v.getGrado();
+					verticePorAgregar = v;
+				}
 			}
 			ret.add(verticePorAgregar);
 			verticePorAgregar.setEnConjunto(true);
@@ -111,23 +105,41 @@ public class Grafo {
 			}
 		}
 		return ret;
-	}	
-	// cuenta cuantos vesinos nuevos se agregarian segun el nodo
+	}
+
+	// cuenta cuantos vecinos nuevos se agregarian segun el nodo
 	private int cantNuevosVecinos(Vertice vertice, ArrayList<Vertice> alcanzados) {
 		int cont = 0;
 		for (Vertice v : vertice.getVecinos()) {
-			if (!alcanzados.contains(v)){
+			if (!alcanzados.contains(v)) {
 				cont++;
 			}
 		}
 		return cont;
 	}
-		
 
 	public int getNumVerts() {
 		return numVerts;
 	}
+
 	public boolean[][] getMatAdyacencia() {
 		return matAdyacencia;
 	}
+	public ArrayList<Vertice> conjuntoDominanteMejorResultado() {
+		ArrayList<Vertice> eleccion = eleccionVecinal();
+		ArrayList<Vertice> mayorGrado = eleccionPorMayorGrado();
+		if (mayorGrado.size() <= eleccion.size())
+			return mayorGrado;
+		return eleccion;
+	}
+	public static void main(String[] args) {
+		Grafo grafo = new Grafo(3);
+		grafo.nuevoVertice("a");
+		grafo.nuevoVertice("b");
+		grafo.nuevoVertice("c");
+		grafo.nuevoArco("a", "b");
+		grafo.nuevoArco("b", "c");
+		System.out.println(grafo.eleccionVecinal());
+	}
+
 }

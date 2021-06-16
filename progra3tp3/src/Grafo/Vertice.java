@@ -61,7 +61,9 @@ public class Vertice {
 	public ArrayList<Vertice> getVecinos() {
 		return vecinos;
 	}
-
+	public boolean equalsPropio(Vertice n) {
+		return nombre.equals(n.nombre);
+	}
 	@Override
 	public boolean equals(Object v) {
 		Vertice v1 = (Vertice) v;
