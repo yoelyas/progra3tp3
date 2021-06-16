@@ -1,6 +1,7 @@
 package Grafo;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Grafo {
 	private boolean[][] matAdyacencia;
@@ -43,6 +44,8 @@ public class Grafo {
 	public void nuevoArco(String a, String b) {
 		int numA = numVertice(a);
 		int numB = numVertice(b);
+		// numVertice no encuentra el vertice y retorna -1 
+		System.out.println(numA);
 		vertices[numA].sumarGrado();
 		vertices[numB].sumarGrado();
 		vertices[numA].agregarVecino(vertices[numB]);
@@ -123,5 +126,8 @@ public class Grafo {
 
 	public int getNumVerts() {
 		return numVerts;
+	}
+	public boolean[][] getMatAdyacencia() {
+		return matAdyacencia;
 	}
 }
