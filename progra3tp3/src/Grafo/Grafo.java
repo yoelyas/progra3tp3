@@ -56,6 +56,15 @@ public class Grafo {
 		int numB = numVertice(b);
 		return matAdyacencia[numA][numB];
 	}
+	
+	public ArrayList<Vertice> mejorResultado(){
+		ArrayList<Vertice> dominante = conjuntoDominante();
+		ArrayList<Vertice> eleccion = eleccionVesinal();
+		
+		return (dominante.size() < eleccion.size())
+			   ? dominante
+			   : eleccion;
+	}
 
 	public ArrayList<Vertice> conjuntoDominante() {
 		ArrayList<Vertice> ret = new ArrayList<Vertice>();
@@ -78,6 +87,39 @@ public class Grafo {
 		}
 		return ret;
 	}
+	
+	public ArrayList<Vertice> eleccionVesinal() {
+		ArrayList<Vertice> ret = new ArrayList<Vertice>();
+		ArrayList<Vertice> alcanzados = new ArrayList<Vertice>();
+		while (alcanzados.size() < numVerts - 1) {
+			int mayorAlcance = -1;
+			Vertice verticePorAgregar = new Vertice("v");
+			for (Vertice v : vertices) {
+				if (!v.enConjunto() && cantNuevosVecinos(v,alcanzados ) > mayorAlcance) {
+						mayorAlcance = v.getGrado();
+						verticePorAgregar = v;
+					}	
+			}
+			ret.add(verticePorAgregar);
+			verticePorAgregar.setEnConjunto(true);
+			for (Vertice v : verticePorAgregar.getVecinos()) {
+				if (!alcanzados.contains(v))
+					alcanzados.add(v);
+			}
+		}
+		return ret;
+	}	
+	// cuenta cuantos vesinos nuevos se agregarian segun el nodo
+	private int cantNuevosVecinos(Vertice vertice, ArrayList<Vertice> alcanzados) {
+		int cont = 0;
+		for (Vertice v : vertice.getVecinos()) {
+			if (!alcanzados.contains(v)){
+				cont++;
+			}
+		}
+		return cont;
+	}
+		
 
 	public int getNumVerts() {
 		return numVerts;
