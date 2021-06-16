@@ -60,16 +60,16 @@ public class Grafo {
 		return matAdyacencia[numA][numB];
 	}
 	
-	public ArrayList<Vertice> mejorResultado(){
-		ArrayList<Vertice> dominante = conjuntoDominante();
-		ArrayList<Vertice> eleccion = eleccionVesinal();
+	public ArrayList<Vertice> conjuntoDominanteMejorResultado(){
+		ArrayList<Vertice> dominante = eleccionPorMayorGrado();
+		ArrayList<Vertice> eleccion = eleccionVecinal();
 		
 		return (dominante.size() < eleccion.size())
 			   ? dominante
 			   : eleccion;
 	}
 
-	public ArrayList<Vertice> conjuntoDominante() {
+	public ArrayList<Vertice> eleccionPorMayorGrado() {
 		ArrayList<Vertice> ret = new ArrayList<Vertice>();
 		ArrayList<Vertice> alcanzados = new ArrayList<Vertice>();
 		while (alcanzados.size() < numVerts - 1) {
@@ -91,7 +91,7 @@ public class Grafo {
 		return ret;
 	}
 	
-	public ArrayList<Vertice> eleccionVesinal() {
+	public ArrayList<Vertice> eleccionVecinal() {
 		ArrayList<Vertice> ret = new ArrayList<Vertice>();
 		ArrayList<Vertice> alcanzados = new ArrayList<Vertice>();
 		while (alcanzados.size() < numVerts - 1) {
