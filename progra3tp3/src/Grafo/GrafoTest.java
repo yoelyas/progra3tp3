@@ -88,7 +88,7 @@ public class GrafoTest {
 		grafo.nuevoArco("b", "c");
 		grafo.nuevoArco("c", "d");
 		grafo.nuevoArco("f", "e");
-		ArrayList<Vertice> resultado = grafo.eleccionVecinal();
+		ArrayList<Vertice> resultado = grafo.conjuntoDominante();
 		assertEquals(esperado, resultado);
 		assertNotEquals(noEsperado, resultado);
 

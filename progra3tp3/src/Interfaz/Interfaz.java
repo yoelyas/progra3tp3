@@ -183,7 +183,7 @@ public class Interfaz {
 		JButton btnMostrarConjuntoDominante = new JButton("Mostrar conjunto dominante");
 		btnMostrarConjuntoDominante.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				ArrayList<Vertice> conjunto = grafo.eleccionVecinal();
+				ArrayList<Vertice> conjunto = grafo.conjuntoDominante();
 				lblConjuntoDominante.setText(conjunto.toString());
 				textFieldPrimerVertice.setFocusable(false);
 				textFieldSegundoVertice.setFocusable(false);

@@ -59,7 +59,7 @@ public class Grafo{
 	}
 
 
-	public ArrayList<Vertice> eleccionVecinal() {
+	public ArrayList<Vertice> conjuntoDominante() {
 		ArrayList<Vertice> ret = new ArrayList<Vertice>();
 		ArrayList<Vertice> alcanzados = new ArrayList<Vertice>();
 		while (alcanzados.size() < numVerts - 1) {
