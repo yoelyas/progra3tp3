@@ -7,7 +7,9 @@ import java.awt.Font;
 import javax.swing.JFrame;
 import Grafo.*;
 import javax.swing.JLabel;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -19,6 +21,7 @@ public class Interfaz {
 	private JTextField textFieldNombreVertice;
 	private JTextField textFieldPrimerVertice;
 	private JTextField textFieldSegundoVertice;
+	private JTable tableMatriz;
 	private Grafo grafo;
 	private int cantNodos;
 	private int contadorNodos;
@@ -38,6 +41,20 @@ public class Interfaz {
 			}
 		});
 	}
+	public void mostrarMatriz(boolean matriz[][], int n) {
+		DefaultTableModel model = (DefaultTableModel) tableMatriz.getModel();
+		model.setRowCount(n);
+		model.setColumnCount(n);
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < n; j++) {
+				if (matriz[i][j] == false) {
+					tableMatriz.setValueAt(0, i, j);
+				} else {
+					tableMatriz.setValueAt(1, i, j);
+				}
+			}
+		}
+	}
 
 	/**
 	 * Create the application.
@@ -51,7 +68,7 @@ public class Interfaz {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 582, 335);
+		frame.setBounds(100, 100, 687, 568);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -149,9 +166,15 @@ public class Interfaz {
 				textFieldSegundoVertice.setText("");
 			}
 		});
+		
+		tableMatriz = new JTable();
+		tableMatriz.setModel(new DefaultTableModel(new Object[][] {}, new String[] {}));
+		tableMatriz.setBounds(24, 237, 639, 209);
+		frame.getContentPane().add(tableMatriz);
+		
 		JLabel lblConjuntoDominante = new JLabel("");
 		lblConjuntoDominante.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblConjuntoDominante.setBounds(314, 230, 350, 14);
+		lblConjuntoDominante.setBounds(311, 476, 350, 23);
 		frame.getContentPane().add(lblConjuntoDominante);
 		
 		btnCrearArco.setBounds(346, 139, 156, 23);
@@ -167,12 +190,21 @@ public class Interfaz {
 				btnCrearArco.setEnabled(false);
 			}
 		});
-		btnMostrarConjuntoDominante.setBounds(24, 226, 250, 23);
+		btnMostrarConjuntoDominante.setBounds(24, 476, 250, 23);
 		frame.getContentPane().add(btnMostrarConjuntoDominante);
 		
 		JLabel lblDosPuntos = new JLabel(":");
-		lblDosPuntos.setBounds(284, 230, 46, 14);
+		lblDosPuntos.setBounds(290, 480, 46, 14);
 		frame.getContentPane().add(lblDosPuntos);
+		
+		JButton btnNewButton = new JButton("Mostrar matriz");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				mostrarMatriz(grafo.getMatAdyacencia(), cantNodos);
+			}
+		});
+		btnNewButton.setBounds(24, 201, 139, 23);
+		frame.getContentPane().add(btnNewButton);
 		
 		
 	}
