@@ -51,7 +51,7 @@ public class Interfaz {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 852, 523);
+		frame.setBounds(100, 100, 582, 335);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -150,6 +150,7 @@ public class Interfaz {
 			}
 		});
 		JLabel lblConjuntoDominante = new JLabel("");
+		lblConjuntoDominante.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblConjuntoDominante.setBounds(314, 230, 350, 14);
 		frame.getContentPane().add(lblConjuntoDominante);
 		
@@ -161,6 +162,9 @@ public class Interfaz {
 			public void actionPerformed(ActionEvent arg0) {
 				ArrayList<Vertice> conjunto = grafo.eleccionVecinal();
 				lblConjuntoDominante.setText(conjunto.toString());
+				textFieldPrimerVertice.setFocusable(false);
+				textFieldSegundoVertice.setFocusable(false);
+				btnCrearArco.setEnabled(false);
 			}
 		});
 		btnMostrarConjuntoDominante.setBounds(24, 226, 250, 23);

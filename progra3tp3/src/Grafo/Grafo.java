@@ -1,7 +1,6 @@
 package Grafo;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class Grafo{
 	private boolean[][] matAdyacencia;
@@ -45,8 +44,6 @@ public class Grafo{
 	public void nuevoArco(String a, String b) {
 		int numA = numVertice(a);
 		int numB = numVertice(b);
-		// numVertice no encuentra el vertice y retorna -1
-		System.out.println(numA);
 		vertices[numA].sumarGrado();
 		vertices[numB].sumarGrado();
 		vertices[numA].agregarVecino(vertices[numB]);
@@ -61,29 +58,6 @@ public class Grafo{
 		return matAdyacencia[numA][numB];
 	}
 
-	
-
-	public ArrayList<Vertice> eleccionPorMayorGrado() {
-		ArrayList<Vertice> ret = new ArrayList<Vertice>();
-		ArrayList<Vertice> alcanzados = new ArrayList<Vertice>();
-		while (alcanzados.size() < numVerts - 1) {
-			int mayorGrado = -1;
-			Vertice verticePorAgregar = new Vertice("v");
-			for (Vertice v : vertices) {
-				if (!v.enConjunto() && v.getGrado() > mayorGrado) {
-					mayorGrado = v.getGrado();
-					verticePorAgregar = v;
-				}
-			}
-			ret.add(verticePorAgregar);
-			verticePorAgregar.setEnConjunto(true);
-			for (Vertice v : verticePorAgregar.getVecinos()) {
-				if (!alcanzados.contains(v))
-					alcanzados.add(v);
-			}
-		}
-		return ret;
-	}
 
 	public ArrayList<Vertice> eleccionVecinal() {
 		ArrayList<Vertice> ret = new ArrayList<Vertice>();
@@ -125,21 +99,6 @@ public class Grafo{
 	public boolean[][] getMatAdyacencia() {
 		return matAdyacencia;
 	}
-	public ArrayList<Vertice> conjuntoDominanteMejorResultado() {
-		ArrayList<Vertice> eleccion = eleccionVecinal();
-		ArrayList<Vertice> mayorGrado = eleccionPorMayorGrado();
-		if (mayorGrado.size() <= eleccion.size())
-			return mayorGrado;
-		return eleccion;
-	}
-	public static void main(String[] args) {
-		Grafo grafo = new Grafo(3);
-		grafo.nuevoVertice("a");
-		grafo.nuevoVertice("b");
-		grafo.nuevoVertice("c");
-		grafo.nuevoArco("a", "b");
-		grafo.nuevoArco("b", "c");
-		System.out.println(grafo.eleccionVecinal());
-	}
+	
 
 }

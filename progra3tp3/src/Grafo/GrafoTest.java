@@ -67,64 +67,13 @@ public class GrafoTest {
 		grafo.nuevoVertice("Uruguay");
 		assertEquals(2, grafo.numVertice("Uruguay"));
 	}
-	
 
-	@Test
-	public void conjuntoDominanteMejorResultadoTest() {
-		ArrayList<Vertice> esperado = new ArrayList<Vertice>();
-		esperado.add(new Vertice("d"));
-		ArrayList<Vertice> noEsperado = new ArrayList<Vertice>();
-		noEsperado.add(new Vertice("a"));
-		Grafo grafo = new Grafo(5);
-		grafo.nuevoVertice("a");
-		grafo.nuevoVertice("b");
-		grafo.nuevoVertice("c");
-		grafo.nuevoVertice("d");
-		grafo.nuevoVertice("e");
-		grafo.nuevoArco("a", "e");
-		grafo.nuevoArco("a", "b");
-		grafo.nuevoArco("a", "d");
-		grafo.nuevoArco("e", "d");
-		grafo.nuevoArco("b", "d");
-		grafo.nuevoArco("b", "c");
-		grafo.nuevoArco("c", "d");
-		ArrayList<Vertice> resultado = grafo.conjuntoDominanteMejorResultado();
-		assertEquals(esperado, resultado);
-		assertNotEquals(noEsperado, resultado);
-		
-	}
-	@Test
-	public void eleccionPorMayorGradoTest() {
-		ArrayList<Vertice> esperado = new ArrayList<Vertice>();
-		esperado.add(new Vertice("d"));
-		ArrayList<Vertice> noEsperado = new ArrayList<Vertice>();
-		noEsperado.add(new Vertice("a"));
-		Grafo grafo = new Grafo(5);
-		grafo.nuevoVertice("a");
-		grafo.nuevoVertice("b");
-		grafo.nuevoVertice("c");
-		grafo.nuevoVertice("d");
-		grafo.nuevoVertice("e");
-		grafo.nuevoArco("a", "e");
-		grafo.nuevoArco("a", "b");
-		grafo.nuevoArco("a", "d");
-		grafo.nuevoArco("e", "d");
-		grafo.nuevoArco("b", "d");
-		grafo.nuevoArco("b", "c");
-		grafo.nuevoArco("c", "d");
-		ArrayList<Vertice> resultado = grafo.eleccionPorMayorGrado();
-		assertEquals(esperado, resultado);
-		assertNotEquals(noEsperado, resultado);
-
-	}
-	
 	@Test
 	public void eleccionVecinalTest() {
 		ArrayList<Vertice> esperado = new ArrayList<Vertice>();
 		esperado.add(new Vertice("d"));
 		esperado.add(new Vertice("b"));
 		esperado.add(new Vertice("e"));
-		
 		ArrayList<Vertice> noEsperado = new ArrayList<Vertice>();
 		noEsperado.add(new Vertice("a"));
 		Grafo grafo = new Grafo(6);
@@ -141,6 +90,8 @@ public class GrafoTest {
 		grafo.nuevoArco("f", "e");
 		ArrayList<Vertice> resultado = grafo.eleccionVecinal();
 		assertEquals(esperado, resultado);
+		assertNotEquals(noEsperado, resultado);
+
 	}
 
 }
