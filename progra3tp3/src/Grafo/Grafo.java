@@ -7,12 +7,12 @@ public class Grafo{
 	private int numVerts;
 	private Vertice[] vertices;
 
-	public Grafo(int tamaño) {
-		matAdyacencia = new boolean[tamaño][tamaño];
-		vertices = new Vertice[tamaño];
+	public Grafo(int tamanio) {
+		matAdyacencia = new boolean[tamanio][tamanio];
+		vertices = new Vertice[tamanio];
 		numVerts = 0;
-		for (int i = 0; i < tamaño; i++) {
-			for (int j = 0; j < tamaño; j++) {
+		for (int i = 0; i < tamanio; i++) {
+			for (int j = 0; j < tamanio; j++) {
 				matAdyacencia[i][j] = false;
 			}
 		}
